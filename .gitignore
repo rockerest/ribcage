@@ -3,6 +3,3 @@ node_modules/
 
 // Install results
 vendor/
-
-// Build results
-build/
