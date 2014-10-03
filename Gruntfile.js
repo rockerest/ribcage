@@ -44,7 +44,7 @@ module.exports = function( grunt ){
                     "optimize": "uglify2",
                     "generateSourceMaps": true,
                     "preserveLicenseComments": false,
-                    "name": "layout",
+                    "name": "ribcage",
                     "out": "build/ribcage.js"
                 }
             }
