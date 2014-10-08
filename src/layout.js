@@ -40,8 +40,8 @@ define(
         Layout.prototype.addPresets = function( presets ){
             var self = this;
 
-            _( presets ).each( function( renderable, name ){
-                self._presets[ name ] = renderable;
+            _( presets ).each( function( preset, name ){
+                self._presets[ name ] = preset;
             });
 
             return this;
@@ -51,21 +51,21 @@ define(
             this._presets[ name ] = renderable;
         };
 
-        Layout.prototype.render = function(){
-            var view = this.createView( this._el, this._template, this._regions ),
+        Layout.prototype.render = function( layoutData ){
+            var view = this.createView( this._el, this._template, layoutData, this._regions ),
                 self = this;
 
             this._currentView = new view();
             this.regions = this._regions;
 
             _( this._presets ).each( function( renderable, name ){
-                self.regions[ name ].show( renderable );
+                self.regions[ name ].show( renderable.object, renderable.data );
             });
 
             return this;
         };
 
-        Layout.prototype.createView = function( el, tmpl, regions ){
+        Layout.prototype.createView = function( el, tmpl, layoutData, regions ){
             var self = this;
 
             return Backbone.View.extend({
@@ -73,7 +73,7 @@ define(
                 "template": _.template( tmpl ),
 
                 "render": function(){
-                    this.$el.html( this.template() );
+                    this.$el.html( this.template( layoutData ) );
                     self.createRegions( regions, this.$el );
 
                     return this;
