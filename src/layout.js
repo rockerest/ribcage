@@ -65,6 +65,37 @@ define(
             return this;
         };
 
+        Layout.prototype.explore = function( path ){
+            if( !this.regions ){
+                throw new Error( "The layout must be rendered in order to explore regions." );
+            }
+            else{
+                var steps = path.split( /[\.:]/ ),
+                    region = this,
+                    count = 0,
+                    name = "this layout";
+
+                _( steps ).each( function( step ){
+                    if( _( region ).has( "regions" ) ){
+                        if( _( region.regions ).has( step ) ){
+                            region = region.regions[ step ];
+                        }
+                        else{
+                            throw new Error( '"' + step + '" is not a region inside "' + name + '".' );
+                        }
+                    }
+                    else if( _( steps ).size() !== count ){
+                        throw new Error( '"' + name + '" does not contain regions.' );
+                    }
+
+                    count++;
+                    name = step;
+                });
+
+                return region;
+            }
+        };
+
         Layout.prototype.createView = function( el, tmpl, layoutData, regions ){
             var self = this;
 
