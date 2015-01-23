@@ -10,7 +10,12 @@ define(
         };
         
         Region.prototype.render = function(){
+            var self = this;
+            
             this._renderable.prototype.el = this.output;
+            this._renderable.prototype.getRegion = function(){
+                return self;
+            };
             
             var regionRenderable = new this._renderable( this._viewData ),
                 layout;
@@ -43,13 +48,16 @@ define(
             
             if( el.length > 0 ){
                 element = el[0];
-            }
-            
-            if( view.$el ){
-                view.setElement( element );
+                
+                if( view.$el ){
+                    view.setElement( element );
+                }
+                else{
+                    view.prototype.el = element;
+                }
             }
             else{
-                view.prototype.el = element;
+                throw new Error( "The selector '" + selector + "' did not select any elements." );
             }
             
             return view;
