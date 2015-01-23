@@ -42,10 +42,6 @@ define(
             var el = this.output.find( selector ),
                 element;
             
-            if( !this._isRendered ){
-                throw new Error( "Intercostal views will not work until this region has been rendered." );
-            }
-            
             if( el.length > 0 ){
                 element = el[0];
                 
