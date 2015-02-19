@@ -3,6 +3,7 @@ define(
     function( _ ){
         var Region = function( parent, selector ){
             this.output = parent.find( selector );
+            this.view = undefined;
             
             this._isRendered = false;
             this._renderable = undefined;
@@ -10,28 +11,35 @@ define(
         };
         
         Region.prototype.render = function(){
-            var self = this;
+            var self = this,
+                layout;
+            
+            if( this._isRendered && this._previous ){
+                this._previous.remove();
+                this._isRendered = false;
+            }
             
             this._renderable.prototype.el = this.output;
             this._renderable.prototype.getRegion = function(){
                 return self;
             };
             
-            var regionRenderable = new this._renderable( this._viewData ),
-                layout;
-            
+            this.view = new this._renderable( this._viewData );
             this._isRendered = true;
             
-            if( _( regionRenderable ).has( "_regions" ) ){
-                regionRenderable.setElement( this.output );
-                layout = regionRenderable.render();
+            if( _( this.view ).has( "_regions" ) ){
+                this.view.setElement( this.output );
+                layout = this.view.render();
                 
                 this.regions = layout.regions;
             }
-            
         };
         
         Region.prototype.show = function( renderable, optionalViewData ){
+            if( this._isRendered ){
+                this._previous = this.view;
+            }
+            
             this._renderable = renderable;
             this._viewData = optionalViewData;
             

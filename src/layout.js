@@ -64,6 +64,15 @@ define(
 
             return this;
         };
+        
+        Layout.prototype.remove = function(){
+            _( this.regions ).each( function( region ){
+                if( region._isRendered ){
+                    region.view.remove();
+                    region._isRendered = false;
+                }
+            });
+        };
 
         Layout.prototype.explore = function( path ){
             if( !this.regions ){
