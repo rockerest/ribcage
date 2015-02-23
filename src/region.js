@@ -14,8 +14,8 @@ define(
             var self = this,
                 layout;
             
-            if( this._isRendered && this._previous ){
-                this._previous.remove();
+            if( this._isRendered ){
+                this.view.remove();
                 this._isRendered = false;
             }
             
@@ -36,10 +36,6 @@ define(
         };
         
         Region.prototype.show = function( renderable, optionalViewData ){
-            if( this._isRendered ){
-                this._previous = this.view;
-            }
-            
             this._renderable = renderable;
             this._viewData = optionalViewData;
             
