@@ -8,6 +8,10 @@ define(
             this._isRendered = false;
             this._renderable = undefined;
             this._viewData = {};
+            
+            this.hasRegions = function(){
+                return this.view && _( this.view ).has( "_regions" );
+            };
         };
         
         Region.prototype.render = function(){
@@ -15,7 +19,13 @@ define(
                 layout;
             
             if( this._isRendered ){
-                this.view.remove();
+                if( this.hasRegions() ){
+                    this.view.remove();
+                }
+                else{
+                    this.view.stopListening();
+                    this.view.$el.empty();
+                }
                 this._isRendered = false;
             }
             
@@ -27,7 +37,7 @@ define(
             this.view = new this._renderable( this._viewData );
             this._isRendered = true;
             
-            if( _( this.view ).has( "_regions" ) ){
+            if( this.hasRegions() ){
                 this.view.setElement( this.output );
                 layout = this.view.render();
                 

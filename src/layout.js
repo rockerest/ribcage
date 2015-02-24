@@ -68,7 +68,8 @@ define(
         Layout.prototype.remove = function(){
             _( this.regions ).each( function( region ){
                 if( region._isRendered ){
-                    region.view.remove();
+                    region.view.stopListening();
+                    region.view.$el.empty();
                     region._isRendered = false;
                 }
             });
