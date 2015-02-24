@@ -14,10 +14,7 @@ define(
             };
         };
         
-        Region.prototype.render = function(){
-            var self = this,
-                layout;
-            
+        Region.prototype.remove = function(){
             if( this._isRendered ){
                 if( this.hasRegions() ){
                     this.view.remove();
@@ -26,8 +23,16 @@ define(
                     this.view.stopListening();
                     this.view.$el.empty();
                 }
+                
                 this._isRendered = false;
             }
+        };
+        
+        Region.prototype.render = function(){
+            var self = this,
+                layout;
+            
+            this.remove();
             
             this._renderable.prototype.el = this.output;
             this._renderable.prototype.getRegion = function(){
