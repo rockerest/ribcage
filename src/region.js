@@ -50,6 +50,18 @@ define(
             }
         };
         
+        Region.prototype.update = function( optionalViewData ){
+            if( this._isRendered && !this.hasRegions() ){
+                this.view.render( optionalViewData );
+            }
+            else if( this._isRendered ){
+                throw new Error( "A layout is rendered into this region. Please select a child region to update." );
+            }
+            else{
+                throw new Error( "The view in this region is not rendered. Please construct a view in this region before attempting to refresh." );
+            }
+        };
+        
         Region.prototype.show = function( renderable, optionalViewData ){
             this._renderable = renderable;
             this._viewData = optionalViewData;
