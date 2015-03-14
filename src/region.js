@@ -21,7 +21,8 @@ define(
                 }
                 else{
                     this.view.stopListening();
-                    this.view.$el.empty();
+                    this.view.undelegateEvents();
+                    this.view.$el.empty();                    
                 }
                 
                 this._isRendered = false;
