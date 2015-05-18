@@ -5,6 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "main": "build/ribcage.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/rockerest/ribcage.git"
@@ -23,7 +24,7 @@
     "url": "https://github.com/rockerest/ribcage/issues"
   },
   "homepage": "https://github.com/rockerest/ribcage",
-  "dependencies": {
+  "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-bower-task": "^0.4.0",
     "grunt-contrib-jshint": "^0.10.0",
