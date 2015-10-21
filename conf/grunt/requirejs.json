@@ -3,9 +3,9 @@
         "options":{
             "baseUrl": "src/",
             "paths": {
-                "backbone": "../vendor/backbone/backbone",
-                "underscore": "../vendor/underscore/underscore",
-                "jquery": "empty:"
+                "backbone": "../node_modules/backbone/backbone",
+                "underscore": "../node_modules/underscore/underscore",
+                "jquery": "../node_modules/jquery/dist/jquery"
             },
             "shim": {
                 "backbone": {
