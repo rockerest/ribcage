@@ -1,0 +1,7 @@
+{
+    "main": {
+        "files": {
+            "./build/ribcage.min.js": ["./build/ribcage.js"]
+        }
+    }
+}

@@ -1,5 +1,2 @@
 // Package managers
-node_modules/
-
-// Install results
-vendor/
+node_modules/**/*
