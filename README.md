@@ -1,7 +1,7 @@
 # ribcage
 
 
-Unopinionated Layouts and Regions for Backbone.
+Barely-opinionated Layouts and Regions for Backbone.
 
 ## Terminologies
 
